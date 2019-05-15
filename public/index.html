@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" type="text/css" href="public/style.css"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title> FAC Rating</title>
+  </head>
+  <body>
+    <h1 class="headLine"> Founders & Coders </h1>
+   <h2 class="scndHead"> Cohort Rating </h2>
+   <h3 class="headSen">About founders and coders</h3>
+    <form class="form" id="form" action="/getStudentData" method="post">
+      <div class="f.name" id="f.name">
+        <label for="first_name">First Name:</label>
+        <input type="text" id="F.name" name="user_first_name" value="">
+      </div>
+      <div class="l.name" id="l.name">
+        <label for="last_name">Last Name:</label>
+        <input type="text" id="L.name" name="user_lasr_name" value="">
+      </div>
+      <div class="location" id="location">
+        <label for="location">Location:</label>
+        <input type="text" id="lction" name="user_location" value="">
+      </div>
+      <div class="cohort" id="cohort">
+        <label for="cohortName">Cohort Name:</label>
+        <input type="text" id="cohortN" name="cohort_name" value="">
+      </div>
+      <div class="rating" id="rating">
+        <label for="rating">Cohort Rating:</label>
+        <input type="text" id="rate" name="cohort_rating" value="">
+      </div>
+    </form>
+    <span id="outcome" class="outcome"></span>
+    <script type="text/javascript" src="public/index.js"></script>
+  </body>
+</html>
