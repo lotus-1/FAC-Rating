@@ -1,0 +1,29 @@
+{
+  "name": "lotussurvey",
+  "version": "1.0.0",
+  "description": "Week 6 database project by Ahlam &amp; Nareman",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lotus-1/LotusSurvey.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/lotus-1/LotusSurvey/issues"
+  },
+  "homepage": "https://github.com/lotus-1/LotusSurvey#readme",
+  "devDependencies": {
+    "nodemon": "^1.19.0",
+    "supertest": "^4.0.2",
+    "tap-spec": "^5.0.0",
+    "tape": "^4.10.1"
+  },
+  "dependencies": {
+    "dotenv": "^8.0.0",
+    "request": "^2.88.0"
+  }
+}
