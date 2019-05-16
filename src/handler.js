@@ -1,7 +1,6 @@
 const path = require('path');
 const fs = require('fs');
 const querystring = require('query-string');
-const requester = require('request');
 const url = require('url');
 
 const getUserData = require('./queries/getUserData');
@@ -54,16 +53,20 @@ const handlerPostDB = ((request, response) => {
   let data = '';
   request.on('data', chunk => {
     data += chunk;
-    console.log('this is the data after chunk : ', data);
+    console.log('this is the data after chunk : ', data.split('&'));
   });
   request.on('end', () => {
-    console.log('the data', data);
-    const { first_name, last_name } = querystring.parse(data);
-    console.log(first_name, last_name);
-    postUserData(first_name, err => {
+    // console.log('the data', data);
+    const parseFirstName = querystring.parse(data).first_name;
+    const parseLastName = querystring.parse(data).last_name;
+    console.log('the parseData', parseFirstName);
+    console.log('the parseData', parseLastName);
+
+    postUserData(parseFirstName, parseLastName, (err, res) => {
+      console.log('res', res);
       if (err) return serverError(err, response);
       response.writeHead(302, { 'Location': '/' });
-      response.end()
+      response.end(parseFirstName,parseLastName);
     });
   });
 });
