@@ -1,20 +1,17 @@
-const handler = require('./handler');
+const handlers = require('./handler');
 
 const router = (request, response) => {
-  const { url } = request;
-console.log(url);
-  if (url === '/') {
-    handler.handlerHome(request, response);
-  } else if (url === '/users') {
-  //   getUsersHandler(response);
-  // } else if (url.includes('/create-user')) {
-  //   addDataHandler(response, request);
-  // } else if (url.includes('public')) {
-    handler.handlerPublic(url, response);
+  if (request.url === '/') {
+    handlers.handlerHome(request, response);
+  } else if (request.url.indexOf('/public') !== -1) {
+    handlers.handlerPublic(request, response, request.url);
+  } else if (request.url.indexOf('/getStudentData') !== -1) {
+    handlers.handlerDB(request, response);
   } else {
-    response.writeHead(404, { 'Content-Type': 'text/html' });
-    response.end('<h1> 404 not found </h1>');
+    response.writeHead(404, {'Content-Type' : 'text/html'});
+    response.end('<h1> 404 , Page Not Found</h1>');
   }
 };
+
 
 module.exports = router;
