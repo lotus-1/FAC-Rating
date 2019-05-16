@@ -43,8 +43,9 @@ const handlerDB = ((request, response) => {
     console.log(data);
   });
   request.on('end', () => {
+    console.log(request);
     const { first_name, last_name } = querystring.parse(data);
-    postData(name, location, err => {
+    postUserData(first_name, last_name, err => {
       if (err) return serverError(err, response);
       response.writeHead(302, { 'Location': '/' });
       response.end()
@@ -54,5 +55,6 @@ const handlerDB = ((request, response) => {
 
 module.exports = {
   handlerHome,
-  handlerPublic
+  handlerPublic,
+  handlerDB
 }
