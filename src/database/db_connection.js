@@ -2,6 +2,7 @@ const { Pool } = require('pg');
 
 const url = require('url');
 require('dotenv').config();
+
 let DB_URL = process.env.DB_URL;
 
 if (process.env.NODE_ENV === "test") {
@@ -16,7 +17,7 @@ const options = {
   host: params.hostname,
   port: params.port,
   database: params.pathname.split('/')[1],
-  max: process.env.DB_MAX_CONNECTIONS || 2,
+  max: process.env.DB_MAX_CONNECTIONS || 10,
   user: username,
   password: password
 };
