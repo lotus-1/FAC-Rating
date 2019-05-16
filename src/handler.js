@@ -4,6 +4,9 @@ const querystring = require('query-string');
 const requester = require('request');
 const url = require('url');
 
+const getUserData = require('./queries/getUserData');
+const postUserData = require('./queries/postUserData');
+
 const handlerHome = (request, response) => {
   const filePath = path.join(__dirname, '..', 'public', 'index.html');
   fs.readFile(filePath, (error, file) => {
@@ -36,16 +39,28 @@ const handlerPublic = ((request, response, url) => {
     }
   });
 });
-const handlerDB = ((request, response) => {
+const handlerGetDB = (response) => {
+  console.log('this is the response in the handlerGetDB: ', response);
+    getUserData((err, students) => {
+      console.log('this is the students : ', students);
+      if (err) return serverError(err, response);
+      response.writeHead(200, { 'Content-Type': 'application/json' });
+      response.end(JSON.stringify(students));
+    });
+};
+
+const handlerPostDB = ((request, response) => {
+  console.log('this is the request url: ', request.url);
   let data = '';
   request.on('data', chunk => {
     data += chunk;
-    console.log(data);
+    console.log('this is the data after chunk : ', data);
   });
   request.on('end', () => {
-    console.log(request);
+    console.log('the data', data);
     const { first_name, last_name } = querystring.parse(data);
-    postUserData(first_name, last_name, err => {
+    console.log(first_name, last_name);
+    postUserData(first_name, err => {
       if (err) return serverError(err, response);
       response.writeHead(302, { 'Location': '/' });
       response.end()
@@ -56,5 +71,6 @@ const handlerDB = ((request, response) => {
 module.exports = {
   handlerHome,
   handlerPublic,
-  handlerDB
+  handlerGetDB,
+  handlerPostDB
 }

@@ -5,10 +5,10 @@ const postUserData = (first_name, last_name, cb) => {
     'INSERT INTO students (first_name, last_name) VALUES ($1, $2)',
     [first_name, last_name],
     (err, res) => {
-      if (err) return cb(err);
+      if (err) return (err);
       cb(null, res);
     }
   );
 };
 
-module.exports = postData;
+module.exports = postUserData;

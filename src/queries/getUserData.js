@@ -3,6 +3,7 @@ const dbConnection = require('../database/db_connection.js');
 
 const getUserData = (cb) => {
   dbConnection.query('SELECT * FROM students;', (err, res) => {
+    console.log('this is the response: ', res);
     if(err) return cb(err);
     console.log('res.rows: ', res.rows);
     cb(null, res.rows);
@@ -10,4 +11,4 @@ const getUserData = (cb) => {
   });
 };
 
-module.exports = getData;
+module.exports = getUserData;

@@ -8,7 +8,7 @@ addButton.addEventListener('click', (event) => {
   const userCohortRate = document.getElementById('rate').value;
 
   console.log(userFirstName, userLastName, userLocation, userCohortName, userCohortRate);
-  fetch('/getStudentData' + userFirstName)
+  fetch('/postStudentData/' + userFirstName)
   .then((response) => {
     console.log('my response is ->', response);
   return response.json();
