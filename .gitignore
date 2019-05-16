@@ -59,3 +59,4 @@ typings/
 
 # next.js build output
 .next
+/home/nareman/Lotus/week-6/FAC-Rating/config.env
