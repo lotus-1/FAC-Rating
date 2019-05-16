@@ -36,6 +36,21 @@ const handlerPublic = ((request, response, url) => {
     }
   });
 });
+const handlerDB = ((request, response) => {
+  let data = '';
+  request.on('data', chunk => {
+    data += chunk;
+    console.log(data);
+  });
+  request.on('end', () => {
+    const { first_name, last_name } = querystring.parse(data);
+    postData(name, location, err => {
+      if (err) return serverError(err, response);
+      response.writeHead(302, { 'Location': '/' });
+      response.end()
+    });
+  });
+});
 
 module.exports = {
   handlerHome,
