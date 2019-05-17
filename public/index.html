@@ -8,8 +8,9 @@
   </head>
   <body>
     <h1 class="headLine"> Founders & Coders </h1>
-   <h2 class="scndHead"> Cohort Rating </h2>
-   <h3 class="headSen">About founders and coders</h3>
+   <h2 class="scndHead"> Cohorts Rating </h2>
+   <h3 class="headSen">Founders & Coders is a community for coding bootcamps. <br> To Learn more about founders and coders <a href="https://www.foundersandcoders.com/" target="_blank">click here.</a></h3>
+<h4>As a student of founders and coders now you can enter your details and give your cohort rating between 0 and 10</h4>
     <form class="form" id="form" action="/postStudentData" method="post">
       <div class="f.name" id="f.name">
         <label for="first_name">First Name:</label>
@@ -34,6 +35,17 @@
       <button type="submit" id="button">Add student</button>
     </form>
     <span id="outcome" class="outcome"></span>
+    <div class="table-container">
+      <table id="students-table">
+        <tr>
+          <th>First name</th>
+          <th>Last name</th>
+          <th>Location</th>
+          <th>Cohort name</th>
+          <th>Cohort rating</th>
+        </tr>
+      </table>
+    </div>
     <script type="text/javascript" src="public/index.js"></script>
   </body>
 </html>
