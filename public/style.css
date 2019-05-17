@@ -1,0 +1,112 @@
+body {
+background-image: url('https://cdn.pixabay.com/photo/2017/07/01/19/48/background-2462431_960_720.jpg');
+background-repeat: no-repeat;
+background-size: cover;
+}
+h1 {
+text-align: center;
+font-size: 80px;
+font-family: serif;
+}
+h2 {
+  text-align: center;
+  font-size: 40px;
+  font-family: serif;
+}
+h3{
+  text-align: center;
+  font-size: 35px;
+  font-family: serif;
+}
+h4 {
+  text-align: center;
+  font-size: 30px;
+  font-family: serif;
+}
+a {
+  text-decoration: none;
+  color: black;
+}
+a:hover{
+  color: blue;
+}
+label{
+  font-size: 25px;
+  font-weight: bolder;
+}
+form, .table-container {
+  width: 40%;
+  margin: 0 auto 50px;
+}
+
+form input {
+  width: 100%;
+  display: block;
+  border: 0;
+  border-bottom: 1px solid #ccc;
+  font-size: 18px;
+  margin-top: 30px;
+  margin-bottom: 30px;
+  line-height: 35px;
+}
+
+form button {
+  background-color: black;
+  color: white;
+  padding: 10px;
+  display: block;
+  border-style: initial;
+  font-size: 25px;
+}
+
+table, table tr {
+  width: 100%;
+}
+
+table tr th {
+  border-bottom: 1px solid #ccc;
+  text-align: left;
+  font-size: 25px;
+  padding-bottom: 10px;
+}
+
+table tr td {
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+@media screen and (max-width: 600px) {
+  body {
+    background-image: url('https://images.wallpaperscraft.com/image/code_coding_binary_code_abstract_patterns_112140_720x1280.jpg');
+    text-align: center;
+    color: white;
+    }
+    h1 {
+      font-size: 80px;
+      padding-left: 50px;
+      padding-top: 10px;
+    }
+    h2 h3 h4 {
+      font-size: 40px;
+    }
+    a {
+      text-decoration: none;
+      color: white;
+      }
+      a:hover{
+      color: blue;
+    }
+form {
+  width: 100%;
+  font-size: 40px;
+}
+table tr th {
+  font-size: 30px;
+}
+form button {
+  background-color: white;
+  color: gold;
+  padding: 10px;
+  display: block;
+  border-style: initial;
+  font-size: 25px;
+}
