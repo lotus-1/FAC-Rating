@@ -40,12 +40,13 @@ const handlerPublic = ((request, response, url) => {
   });
 });
 const handlerGetDB = (response) => {
-  console.log('this is the response in the handlerGetDB: ', response);
-    getUserData((err, students) => {
+    getUserData((err, students, campuses, rating) => {
       console.log('this is the students : ', students);
+      console.log('this is the campuses : ', campuses);
+      console.log('this is the rating : ', rating);
       if (err) return serverError(err, response);
       response.writeHead(200, { 'Content-Type': 'application/json' });
-      response.end(JSON.stringify(students));
+      response.end(JSON.stringify(students,campuses,rating));
     });
 };
 
@@ -54,20 +55,27 @@ const handlerPostDB = ((request, response) => {
   let data = '';
   request.on('data', chunk => {
     data += chunk;
-    console.log('this is the data after chunk : ', data.split('&'));
+    console.log('this is the data after chunk : ', data);//.split('&');
   });
   request.on('end', () => {
     // console.log('the data', data);
     const parseFirstName = querystring.parse(data).first_name;
     const parseLastName = querystring.parse(data).last_name;
-    console.log('the parseData', parseFirstName);
-    console.log('the parseData', parseLastName);
+    const parseLocation = querystring.parse(data).location;
+    const parseCohort = querystring.parse(data).cohort_name;
+    const parseRate = querystring.parse(data).rate;
 
-    postUserData(parseFirstName, parseLastName, (err, res) => {
-      console.log('res', res);
+    console.log('the parseFirstName', parseFirstName);
+    console.log('the parseLastName', parseLastName);
+    console.log('the parseLocation', parseLocation);
+    console.log('the parseCohort', parseCohort);
+    console.log('the parseRate', parseRate);
+
+    postUserData(parseFirstName, parseLastName, parseLocation, parseCohort, parseRate, (err, res) => {
+      console.log('res is :', res);
       if (err) return serverError(err, response);
       response.writeHead(302, { 'Location': '/' });
-      response.end(parseFirstName,parseLastName);
+      response.end(parseFirstName,parseLastName,parseLocation,parseCohort,parseRate);
     });
   });
 });
