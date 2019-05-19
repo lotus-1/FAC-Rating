@@ -25,7 +25,6 @@ function (data) {
   fetch("getStudentData", {
     method: 'POST',
     body:JSON.stringify(data),
-
   });
     .then((response) => {
       return response.json();
