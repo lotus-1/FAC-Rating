@@ -1,4 +1,5 @@
-# Founders and Coders
+# Founders and Coders Rating
+#### Our website on Heroku: [Fac_Rating](https://fac-rating.herokuapp.com/)
 ## project :date: Week 6 by :arrow_right: Ahlam &amp; Nareman  
 #### This project involve setting up a database which connect to via a node.js server.
 #### Our app is for all the students that involve in founders and coders bootcamps, the users as a students can enter there details and give rating for there cohorts.
