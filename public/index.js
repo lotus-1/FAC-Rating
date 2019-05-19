@@ -20,3 +20,20 @@
 //   //     console.log(err);
 //   // })
 // //
+
+function (data) {
+  fetch("getStudentData", {
+    method: 'POST',
+    body:JSON.stringify(data),
+
+  });
+    .then((response) => {
+      return response.json();
+    })
+    .then((data) => {
+      console.log(' this is the data in the fetch function', data);
+    })
+    .catch((err) => {
+
+    })
+}
