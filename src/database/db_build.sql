@@ -14,7 +14,7 @@ CREATE TABLE campuses (
   id SERIAL PRIMARY KEY,
   location VARCHAR(100),
   cohort_name VARCHAR(100),
-  FOREIGN KEY (student_id) REFERENCES students(id)
+  student_id INTEGER REFERENCES students(id) 
 );
 
 CREATE TABLE rating (
