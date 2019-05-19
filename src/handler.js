@@ -40,13 +40,13 @@ const handlerPublic = ((request, response, url) => {
   });
 });
 const handlerGetDB = (response) => {
-    getUserData((err, students, campuses, rating) => {
+    getUserData((err, students) => {
       console.log('this is the students : ', students);
-      console.log('this is the campuses : ', campuses);
-      console.log('this is the rating : ', rating);
+      // console.log('this is the campuses : ', campuses);
+      // console.log('this is the rating : ', rating);
       if (err) return serverError(err, response);
       response.writeHead(200, { 'Content-Type': 'application/json' });
-      response.end(JSON.stringify(students,campuses,rating));
+      response.end(JSON.stringify(students));
     });
 };
 
@@ -72,7 +72,7 @@ const handlerPostDB = ((request, response) => {
     console.log('the parseRate', parseRate);
 
     postUserData(parseFirstName, parseLastName, parseLocation, parseCohort, parseRate, (err, res) => {
-      console.log('res is :', res);
+      console.log('res is in postUserData :', res);
       if (err) return serverError(err, response);
       response.writeHead(302, { 'Location': '/' });
       response.end(parseFirstName,parseLastName,parseLocation,parseCohort,parseRate);
