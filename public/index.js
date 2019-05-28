@@ -1,7 +1,9 @@
 const addButton = document.getElementById('button');
 addButton.addEventListener('click', (event) => {
   event.preventDefault();
-  fetch("/getStudentData")
+  fetch("/getStudentData", {
+    method: 'POST'
+  })
     .then((response) => {
       return response.json();
     })

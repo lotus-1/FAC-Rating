@@ -56,7 +56,7 @@ const handlerPostDB = ((request, response) => {
     console.log('this is the data after chunk : ', data);//.split('&');
   });
   request.on('end', () => {
-    // console.log('the data', data);
+    console.log('the data', data);
     const parseFirstName = querystring.parse(data).first_name;
     const parseLastName = querystring.parse(data).last_name;
     const parseLocation = querystring.parse(data).location;
@@ -73,7 +73,8 @@ const handlerPostDB = ((request, response) => {
       console.log('res is in postUserData :', res);
       if (err) throw err;
       response.writeHead(302, { 'Location': '/' });
-      response.end(parseFirstName,parseLastName,parseLocation,parseCohort,parseRate);
+      // response.end(parseFirstName,parseLastName,parseLocation,parseCohort,parseRate);
+response.end();
     });
   });
 });

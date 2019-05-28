@@ -2,10 +2,14 @@
 const dbConnection = require('../database/db_connection.js');
 
 const getUserData = (cb) => {
-  dbConnection.query('SELECT first_name, last_name, location, cohort_name, rate FROM students INNER JOIN campuses ON students.id = campuses.student_id;', (err, res) => {
-  // dbConnection.query('SELECT first_name, last_name FROM students;', (err, res) => {
+  // dbConnection.query('SELECT first_name, last_name, location, cohort_name, rate FROM students INNER JOIN campuses ON students.id = campuses.student_id;', (err, res) => {
+  // dbConnection.query('(SELECT first_name, last_name FROM students) UNION (SELECT location, cohort_name FROM campuses);', (err, res) => {
+      // dbConnection.query('SELECT * FROM students ;', (err, res) => {
+dbConnection.query('SELECT students.first_name, students.last_name, campuses.location, campuses.cohort_name, campuses.rate FROM students INNER JOIN campuses ON students.id = campuses.student_id;', (err, res) => {
+
     console.log('this is the response from students: ', res);
     if(err) return cb(err);
+
     // dbConnection.query('SELECT location, cohort_name, rate FROM campuses;', (err, res) => {
       // console.log('this is the response from campuses: ', res);
     // if(err) return cb(err);

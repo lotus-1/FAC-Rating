@@ -11,6 +11,7 @@ const postUserData = (first_name, last_name, location, cohort_name, rate, cb) =>
       cb(null, res);
     }
   );
+};
 
 //   dbConnection.query('INSERT INTO students (first_name, last_name) VALUES ($1, $2)',
 //     [first_name, last_name], (err, res1) => {
@@ -32,8 +33,6 @@ const postUserData = (first_name, last_name, location, cohort_name, rate, cb) =>
 //          });
 //        });
 // });
-};
-
 
 
 module.exports = postUserData;
