@@ -60,8 +60,9 @@ const handlerPostDB = ((request, response) => {
     const parseFirstName = querystring.parse(data).first_name;
     const parseLastName = querystring.parse(data).last_name;
     const parseLocation = querystring.parse(data).location;
-    const parseCohort = querystring.parse(data).cohort_name;
+    const parseCohort = querystring.parse(data).cohortName;
     const parseRate = querystring.parse(data).rate;
+    const rateInteger = Number(parseRate);
 
     console.log('the parseFirstName', parseFirstName);
     console.log('the parseLastName', parseLastName);
@@ -69,11 +70,11 @@ const handlerPostDB = ((request, response) => {
     console.log('the parseCohort', parseCohort);
     console.log('the parseRate', parseRate);
 
-    postUserData(parseFirstName, parseLastName, parseLocation, parseCohort, parseRate, (err, res) => {
+    postUserData(parseFirstName, parseLastName, parseLocation, parseCohort, rateInteger, (err, res) => {
       console.log('res is in postUserData :', res);
       if (err) throw err;
       response.writeHead(302, { 'Location': '/' });
-      response.end(parseFirstName,parseLastName,parseLocation,parseCohort,parseRate);
+      response.end(parseFirstName,parseLastName,parseLocation,parseCohort,rateInteger);
     });
   });
 });
