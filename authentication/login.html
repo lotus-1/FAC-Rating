@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" type="text/css" href="public/style.css"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title> FAC Rating</title>
+  </head>
+<body>
+  <section class="signup">
+    <h1>Log In</h1>
+    <form class="signup__form" method='post' action='/login' novalidate>
+      <label for="email">Email:
+        <input id="email" type="email" name="email" required/>
+      </label>
+      <label for="password">Password:
+        <input id="password" type="password" name="password" required pattern="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$" />
+      </label>
+      <p class="error" aria-live="polite"></p>
+      <button type="submit">Sign in</button>
+    </br>
+    </form>
+    <h4>If you do not have an account, please sign up</h4>
+    <form class="signup__form" method='post' action='/registration' novalidate>
+    <button type="submit" >Sign up</button>
+  </section>
+  <script type="text/javascript" src="public/index.js"></script>
+
+</body>
+
+</html>
