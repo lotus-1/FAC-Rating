@@ -64,7 +64,7 @@ const handlerPostDB = ((request, response) => {
     const parseLocation = querystring.parse(data).location;
     const parseCohort = querystring.parse(data).cohortName;
     const parseRate = querystring.parse(data).rate;
-    const rateInteger = Number(parseRate);
+    // const rateInteger = Number(parseRate);
 
     console.log('the parseFirstName', parseFirstName);
     console.log('the parseLastName', parseLastName);
@@ -72,11 +72,11 @@ const handlerPostDB = ((request, response) => {
     console.log('the parseCohort', parseCohort);
     console.log('the parseRate', parseRate);
 
-    postUserData(parseFirstName, parseLastName, parseLocation, parseCohort, rateInteger, (err, res) => {
-      console.log('res is in postUserData :', res);
+    postUserData(parseFirstName, parseLastName, parseLocation, parseCohort, parseRate, (err, res) => {
+      console.log('res is in handlerPostDB :', res);
       if (err) return serverError(err, response);
       response.writeHead(302, { 'Location': '/' });
-      response.end(parseFirstName,parseLastName,parseLocation,parseCohort,rateInteger);
+      response.end(parseFirstName,parseLastName,parseLocation,parseCohort,parseRate);
     });
   });
 });
