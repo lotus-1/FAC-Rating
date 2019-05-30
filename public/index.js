@@ -21,6 +21,7 @@
 //   // })
 // //
 
+
 // function fetchData(data) {
 
   // fetch("getStudentData", {
@@ -29,7 +30,6 @@
   // })
 
   fetch("/getStudentData")
-
     .then((response) => {
       return response.json();
     })

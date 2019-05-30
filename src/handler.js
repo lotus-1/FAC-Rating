@@ -7,6 +7,31 @@ const getUserData = require('./queries/getUserData');
 const postUserData = require('./queries/postUserData');
 
 const handlerHome = (request, response) => {
+  const filePath = path.join(__dirname, '..', 'authentication', 'login.html');
+  fs.readFile(filePath, (error, file) => {
+    if(error) {
+      response.writeHead(500, { 'Content-Type': 'text/html' });
+      response.end('<h1> Sorry, there is Error </h1>');
+    } else {
+      response.writeHead(200, { 'Content-Type': 'text/html' });
+      response.end(file);
+    }
+  });
+};
+const handlerRegistr = (request, response) => {
+  const filePath = path.join(__dirname, '..', 'authentication', 'registration.html');
+  fs.readFile(filePath, (error, file) => {
+    if (error) {
+      response.writeHead(500, { 'Content-Type': 'text/html' });
+      response.end('<h1> Sorry, there is Error </h1>');
+    } else {
+      response.writeHead(200, { 'Content-Type': 'text/html' });
+      response.end(file);
+    }
+  });
+};
+
+const handlerLogin = (request, response) => {
   const filePath = path.join(__dirname, '..', 'public', 'index.html');
   fs.readFile(filePath, (error, file) => {
     if (error) {
@@ -42,9 +67,7 @@ const handlerPublic = ((request, response, url) => {
 const handlerGetDB = (response) => {
     getUserData((err, students) => {
       console.log('this is the students : ', students);
-      // console.log('this is the campuses : ', campuses);
-      // console.log('this is the rating : ', rating);
-      if (err) return serverError(err, response);
+      if (err) throw err;
       response.writeHead(200, { 'Content-Type': 'application/json' });
       response.end(JSON.stringify(students));
     });
@@ -83,6 +106,8 @@ const handlerPostDB = ((request, response) => {
 
 module.exports = {
   handlerHome,
+  handlerLogin,
+  handlerRegistr,
   handlerPublic,
   handlerGetDB,
   handlerPostDB
