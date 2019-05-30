@@ -42,9 +42,7 @@ const handlerPublic = ((request, response, url) => {
 const handlerGetDB = (response) => {
     getUserData((err, students) => {
       console.log('this is the students : ', students);
-      // console.log('this is the campuses : ', campuses);
-      // console.log('this is the rating : ', rating);
-      if (err) return serverError(err, response);
+      if (err) throw err;
       response.writeHead(200, { 'Content-Type': 'application/json' });
       response.end(JSON.stringify(students));
     });
@@ -74,7 +72,7 @@ const handlerPostDB = ((request, response) => {
 
     postUserData(parseFirstName, parseLastName, parseLocation, parseCohort, rateInteger, (err, res) => {
       console.log('res is in postUserData :', res);
-      if (err) return serverError(err, response);
+      if (err) throw err;
       response.writeHead(302, { 'Location': '/' });
       response.end(parseFirstName,parseLastName,parseLocation,parseCohort,rateInteger);
     });
