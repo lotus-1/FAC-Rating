@@ -40,20 +40,20 @@ const handlerPublic = ((request, response, url) => {
   });
 });
 const handlerGetDB = (response) => {
-    getUserData((err, students) => {
-      console.log('this is the students : ', students);
+    getUserData((err, users) => {
+      console.log('this is the users in the handlerGetDB : ', users);
       if (err) throw err;
       response.writeHead(200, { 'Content-Type': 'application/json' });
-      response.end(JSON.stringify(students));
+      response.end(JSON.stringify(users));
     });
 };
 
 const handlerPostDB = ((request, response) => {
-  console.log('this is the request url: ', request.url);
+  console.log('this is the request url in handlerPostDB : ', request.url);
   let data = '';
   request.on('data', chunk => {
     data += chunk;
-    console.log('this is the data after chunk : ', data);//.split('&');
+    console.log('this is the data after chunk : ', data);
   });
   request.on('end', () => {
     console.log('the data', data);
@@ -73,8 +73,7 @@ const handlerPostDB = ((request, response) => {
       console.log('res is in postUserData :', res);
       if (err) throw err;
       response.writeHead(302, { 'Location': '/' });
-      // response.end(parseFirstName,parseLastName,parseLocation,parseCohort,parseRate);
-response.end();
+      response.end(parseFirstName,parseLastName,parseLocation,parseCohort,parseRate);
     });
   });
 });
