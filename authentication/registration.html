@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" type="text/css" href="public/style.css"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title> FAC Rating</title>
+  </head>
+  <body>
+<h1>Regestration</h1>
+<form class="registration_form" method='post' action='/registration' novalidate>
+  <label for="email">Email:
+    <input id="email" type="email" name="email" required/>
+  </label>
+  <label for="password">Password:
+    <input id="password" type="password" name="password" placeholder="Must be at least 8 characters" required pattern="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$" />
+  </label>
+  <label for="Confirmpassword">Confirm password:
+    <input id="Confirmpassword" type="Confirmpassword" name="Confirmpassword" required/>
+  </label>
+  <p class="error" aria-live="polite"></p>
+  <button type="submit">Register</button>
+</form>
+
+</body>
+<script type="text/javascript" src="public/index.js"></script>
+</html>
