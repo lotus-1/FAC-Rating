@@ -19,5 +19,10 @@ CREATE TABLE campuses (
 
 );
 
+CREATE TABLE users (
+  userId SERIAL PRIMARY KEY,
+  email VARCHAR(100) NOT NULL,
+  password VARCHAR(100) NOT NULL
+);
 
 COMMIT;
