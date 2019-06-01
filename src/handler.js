@@ -19,7 +19,7 @@ const handlerHome = (request, response) => {
   });
 };
 const handlerRegistr = (request, response) => {
-  const filePath = path.join(__dirname, '..', 'authentication', 'registration.html');
+const filePath = path.join(__dirname, '..', 'authentication', 'registration.html');
   fs.readFile(filePath, (error, file) => {
     if (error) {
       response.writeHead(500, { 'Content-Type': 'text/html' });
