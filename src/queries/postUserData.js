@@ -17,6 +17,17 @@ const postUserData = (first_name, last_name, location, cohortName, rate, cb) => 
          });
       });
 };
+const bcrypt = require('bcryptjs');
+const password = 'password';
+const salt = '/B45';
+bcrypt.hash(password, salt, (err, hash) => {
+  dbConnection.query('INSERT INTO users (email, password) VALUES ($1, $2)',
+[email, password],
+(error, res) => {
+  if(error) throw error;
+  console.log(res);
+})
+})
 
 
 
