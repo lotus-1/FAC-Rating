@@ -1,4 +1,5 @@
 const dbConnection = require('../database/db_connection.js');
+const bcrypt = require('bcryptjs');
 
 const postUserData = (first_name, last_name, location, cohortName, rate, cb) => {
   dbConnection.query('INSERT INTO students (first_name, last_name) VALUES ($1, $2)',
@@ -17,18 +18,17 @@ const postUserData = (first_name, last_name, location, cohortName, rate, cb) => 
          });
       });
 };
-const bcrypt = require('bcryptjs');
-const password = 'password';
-const salt = '/B45';
-bcrypt.hash(password, salt, (err, hash) => {
-  dbConnection.query('INSERT INTO users (email, password) VALUES ($1, $2)',
-[email, password],
-(error, res) => {
-  if(error) throw error;
-  console.log(res);
-})
-})
+
+const postLoginData = (email, password, cb) => {
+
+    dbConnection.query('INSERT INTO users (email, password) VALUES ($1, $2)',
+      [email, password],
+      (error, res) => {
+        if(error) throw error;
+        console.log(res);
+  })
+};
 
 
 
-module.exports = postUserData;
+module.exports = {postUserData, postLoginData};
