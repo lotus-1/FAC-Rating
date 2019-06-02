@@ -2,6 +2,7 @@ BEGIN;
 
 DROP TABLE IF EXISTS students CASCADE;
 DROP TABLE IF EXISTS campuses CASCADE;
+DROP TABLE IF EXISTS users CASCADE;
 
 CREATE TABLE students (
   studentId SERIAL PRIMARY KEY,
@@ -10,7 +11,6 @@ CREATE TABLE students (
 );
 
 CREATE TABLE campuses (
-
   campusId SERIAL PRIMARY KEY,
   location VARCHAR(100) NOT NULL,
   cohortName VARCHAR(100) NOT NULL,

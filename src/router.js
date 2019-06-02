@@ -3,10 +3,14 @@ const handlers = require('./handler');
 const router = (request, response) => {
 if(request.url === '/'){
   handlers.handlerHome(request, response);
-} else if (request.url === '/registration') {
-  handlers.handlerRegistr(request, response);
-} else if (request.url === '/login') {
+  } else if (request.url === '/registration') {
+    handlers.handlerRegistr(request, response);
+  } else if (request.url === '/hash') {
+    handlers.handlerHash(request, response)
+  } else if (request.url === '/login') {
     handlers.handlerLogin(request, response);
+  }else if (request.url === '/validate') {
+    handlers.handlerValidation(request, response);
   } else if (request.url.indexOf('/public') !== -1) {
     handlers.handlerPublic(request, response, request.url);
   } else if (request.url.indexOf('/getStudentData') !== -1) {

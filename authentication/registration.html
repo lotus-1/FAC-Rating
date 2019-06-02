@@ -16,15 +16,15 @@
     <input id="password" type="password" name="password" placeholder="Must be at least 8 characters" required/>
   </label>
   <label for="Confirmpassword">Confirm password:
-    <input id="Confirmpassword" type="Confirmpassword" name="Confirmpassword" required/>
+    <input id="Confirmpassword" type="password" name="Confirmpassword" required/>
   </label>
   <p id="error" aria-live="polite"></p>
-  <button type="submit">Register</button>
+  <button type="submit" formaction="/hash">Register</button>
 </form>
 </body>
 
 <script type="text/javascript" src="public/main.js"></script>
 
-<!-- <script type="text/javascript" src="src/queries/hash.js"></script> -->
+<!-- <script type="text/javascript" src="public/hash.js"></script> -->
 
 </html>

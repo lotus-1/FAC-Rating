@@ -2,9 +2,10 @@ const path = require('path');
 const fs = require('fs');
 const querystring = require('query-string');
 const url = require('url');
-
+const bcrypt = require('bcryptjs');
 const getUserData = require('./queries/getUserData');
 const postUserData = require('./queries/postUserData');
+
 
 const handlerHome = (request, response) => {
   const filePath = path.join(__dirname, '..', 'authentication', 'login.html');
@@ -18,6 +19,8 @@ const handlerHome = (request, response) => {
     }
   });
 };
+
+
 const handlerRegistr = (request, response) => {
 const filePath = path.join(__dirname, '..', 'authentication', 'registration.html');
   fs.readFile(filePath, (error, file) => {
@@ -31,6 +34,7 @@ const filePath = path.join(__dirname, '..', 'authentication', 'registration.html
   });
 };
 
+
 const handlerLogin = (request, response) => {
   const filePath = path.join(__dirname, '..', 'public', 'index.html');
   fs.readFile(filePath, (error, file) => {
@@ -43,6 +47,11 @@ const handlerLogin = (request, response) => {
     }
   });
 };
+
+// const handlerValidation = (request, response) => {
+//   console.log(request.headers.cookie);
+// }
+
 
 const handlerPublic = ((request, response, url) => {
   const extension = url.split('.')[1];
@@ -64,6 +73,8 @@ const handlerPublic = ((request, response, url) => {
     }
   });
 });
+
+
 const handlerGetDB = (response) => {
     getUserData((err, students) => {
       console.log('this is the students : ', students);
@@ -72,6 +83,45 @@ const handlerGetDB = (response) => {
       response.end(JSON.stringify(students));
     });
 };
+
+
+const handlerHash = (request, response) => {
+  let body = '';
+  request.on('data', (data) => {
+    body += data.toString();
+  });
+  request.on('end', () => {
+    console.log('body is: ', body);
+    const {email, password} = querystring.parse(body);
+      console.log('email, password:', email, password);
+      bcrypt.genSalt(10, (err, salt) => {
+        bcrypt.hash(password, 10, (err, hash) => {
+          if (err) {
+            response.statusCode = 500;
+            response.end('Error registiration');
+            return
+          } else {
+            console.log('hashed password: ', hash);
+            postUserData.postLoginData(email, hash, (err, result) => {
+              if(err){
+                response.statusCode = 500;
+                response.end('Error registration');
+                return
+              }
+              response.statusCode = 200;
+              response.end('Successfully registered!');
+            })
+          }
+      })
+    })
+  })
+  response.writeHead(302, {
+  'Location': '/',
+  'Set-Cookie': 'logged_in=true; HttpOnly; Max-Age=9000'
+});
+  response.end();
+}
+
 
 const handlerPostDB = ((request, response) => {
   console.log('this is the request url: ', request.url);
@@ -110,5 +160,6 @@ module.exports = {
   handlerRegistr,
   handlerPublic,
   handlerGetDB,
-  handlerPostDB
+  handlerPostDB,
+  handlerHash
 }
