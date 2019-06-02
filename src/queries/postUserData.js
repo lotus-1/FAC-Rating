@@ -20,7 +20,6 @@ const postUserData = (first_name, last_name, location, cohortName, rate, cb) => 
 };
 
 const postLoginData = (email, password, cb) => {
-
     dbConnection.query('INSERT INTO users (email, password) VALUES ($1, $2)',
       [email, password],
       (error, res) => {
@@ -29,6 +28,15 @@ const postLoginData = (email, password, cb) => {
   })
 };
 
+const getEmailExist =  (email, cb) => {
+  console.log('this is the email in the getEmailExist: ', email);
+  dbConnection.query(`SELECT * FROM users WHERE email LIKE '%${email}%'`, (err, res) => {
+    console.log(res.rows.length, 'this is the res.rows.length');
+    console.log(res.rows.length > 0, 'this is the res where length > 0');
+    return res.rows.length>0;
+  })
+};
 
 
-module.exports = {postUserData, postLoginData};
+
+module.exports = {postUserData, postLoginData, getEmailExist};
