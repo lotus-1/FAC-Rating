@@ -63,7 +63,9 @@ const handlerValidation = (request, response) => {
     console.log('email, password:', email, password);
     let parseCookie = cookie.parse(request.headers.cookie);
     console.log('parseCookie is :', parseCookie);
-    if (postUserData.getEmailExist(email) !== true) {
+    let result = postUserData.getEmailExist(email);
+    console.log('this is the result after validation : ', result);
+    if(result === 0) {
       response.statusCode = 500;
       response.end('<h1> Please sign up first</h1>');
     } else {
@@ -115,9 +117,9 @@ const handlerHash = (request, response) => {
     console.log('body is: ', body);
     const {email, password} = querystring.parse(body);
       console.log('email, password:', email, password);
-      if (postUserData.getEmailExist(email) !== true) {
+      if (!postUserData.getEmailExist(email)) {
       bcrypt.genSalt(10, (err, salt) => {
-        bcrypt.hash(password, 10, (err, hash) => {
+        bcrypt.hash(password, salt, (err, hash) => {
           if (err) {
             response.statusCode = 500;
             response.end('Error registiration');
@@ -154,16 +156,14 @@ const handlerPostDB = ((request, response) => {
   let data = '';
   request.on('data', chunk => {
     data += chunk;
-    console.log('this is the data after chunk : ', data);//.split('&');
+    console.log('this is the data after chunk : ', data);
   });
   request.on('end', () => {
-    // console.log('the data', data);
     const parseFirstName = querystring.parse(data).first_name;
     const parseLastName = querystring.parse(data).last_name;
     const parseLocation = querystring.parse(data).location;
     const parseCohort = querystring.parse(data).cohortName;
     const parseRate = querystring.parse(data).rate;
-    // const rateInteger = Number(parseRate);
 
     console.log('the parseFirstName', parseFirstName);
     console.log('the parseLastName', parseLastName);

@@ -33,7 +33,7 @@ const getEmailExist =  (email, cb) => {
   dbConnection.query(`SELECT * FROM users WHERE email LIKE '%${email}%'`, (err, res) => {
     console.log(res.rows.length, 'this is the res.rows.length');
     console.log(res.rows.length > 0, 'this is the res where length > 0');
-    return res.rows.length>0;
+    return res.rows.length;
   })
 };
 

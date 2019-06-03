@@ -18,15 +18,3 @@ test('Home route returns a status code of 200', (t) => {
       t.end();
     });
 });
-
-// test('Convert route returns the currency value of the input currency', (t) => {
-//   supertest(router)
-//     .get('/convert?cur=USD')
-//     .expect('3.6137924882')
-//     .expect('Content-Type', /html/)
-//     .end((err, res) => {
-//       t.error(err);
-//       t.equal(typeof res.text, 'string', 'Should return \'string of number\' when entering USD');
-//       t.end();
-//     });
-// });
