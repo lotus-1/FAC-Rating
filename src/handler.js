@@ -5,6 +5,8 @@ const url = require('url');
 const bcrypt = require('bcryptjs');
 const getUserData = require('./queries/getUserData');
 const postUserData = require('./queries/postUserData');
+const cookie = require('cookie');
+const jwt = require('jsonwebtoken');
 
 
 const handlerHome = (request, response) => {
@@ -48,10 +50,29 @@ const handlerLogin = (request, response) => {
   });
 };
 
-// const handlerValidation = (request, response) => {
-//   console.log(request.headers.cookie);
-// }
 
+const handlerValidation = (request, response) => {
+  console.log('request.headers.cookie in handlerValidation:', request.headers.cookie);
+  let body = '';
+  request.on('data', (data) => {
+    body += data.toString();
+  });
+  request.on('end', () => {
+    console.log('body is: ', body);
+    const {email, password} = querystring.parse(body);
+    console.log('email, password:', email, password);
+    let parseCookie = cookie.parse(request.headers.cookie);
+    console.log('parseCookie is :', parseCookie);
+    if (postUserData.getEmailExist(email) !== true) {
+      response.statusCode = 500;
+      response.end('<h1> Please sign up first</h1>');
+    } else {
+      console.log('after validation we are loged in to rate fac campuses');
+      response.writeHead(302, { 'Location': '/login' });
+      response.end();
+    }
+  })
+}
 
 const handlerPublic = ((request, response, url) => {
   const extension = url.split('.')[1];
@@ -94,6 +115,7 @@ const handlerHash = (request, response) => {
     console.log('body is: ', body);
     const {email, password} = querystring.parse(body);
       console.log('email, password:', email, password);
+      if (postUserData.getEmailExist(email) !== true) {
       bcrypt.genSalt(10, (err, salt) => {
         bcrypt.hash(password, 10, (err, hash) => {
           if (err) {
@@ -112,14 +134,18 @@ const handlerHash = (request, response) => {
               response.end('Successfully registered!');
             })
           }
+        })
       })
-    })
+    response.writeHead(302, {
+    'Location': '/',
+    'Set-Cookie': 'logged_in=true; HttpOnly; Max-Age=9000'
+  });
+    response.end();
+  } else {
+    response.statusCode = 500;
+    response.end('<h1> you already have an account, Please log in</h1>');
+  }
   })
-  response.writeHead(302, {
-  'Location': '/',
-  'Set-Cookie': 'logged_in=true; HttpOnly; Max-Age=9000'
-});
-  response.end();
 }
 
 
@@ -161,5 +187,6 @@ module.exports = {
   handlerPublic,
   handlerGetDB,
   handlerPostDB,
-  handlerHash
+  handlerHash,
+  handlerValidation
 }
